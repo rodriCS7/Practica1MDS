@@ -43,6 +43,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 /** Security configuration for WebGoat. */
 @Configuration
@@ -84,7 +85,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
   }
     
   @Bean 
-  public PasswordEncoder enconder(){
+  public PasswordEncoder encoder(){
     return BCryptPasswordEncoder(10, new SecureRandom());
   }
 
