@@ -82,10 +82,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     http.headers().cacheControl().disable();
     http.exceptionHandling().authenticationEntryPoint(new AjaxAuthenticationEntryPoint("/login"));
   }
+    
+  @Bean 
+  public PasswordEncoder enconder(){
+    return BCryptPasswordEncoder(10, new SecureRandom());
+  }
 
   @Autowired
   public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-    auth.userDetailsService(userDetailsService);
+    auth.userDetailsService(userDetailsService).passwordEncoder(encoder());
   }
 
   @Bean
@@ -105,4 +110,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
   public NoOpPasswordEncoder passwordEncoder() {
     return (NoOpPasswordEncoder) NoOpPasswordEncoder.getInstance();
   }
+
+  
+    
 }
